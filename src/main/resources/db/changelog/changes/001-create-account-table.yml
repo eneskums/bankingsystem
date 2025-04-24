@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001
+      author: developer
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: identity_no
+                  type: numeric(11)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: account_type
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: balance
+                  type: numeric(9,2)
+                  constraints:
+                    nullable: false
+
+        - addUniqueConstraint:
+            tableName: account
+            columnNames: identity_no, account_type
+            constraintName: uq_account_identity_type

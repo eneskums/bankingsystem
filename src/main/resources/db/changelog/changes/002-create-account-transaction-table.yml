@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001
+      author: developer
+      changes:
+        - createTable:
+            tableName: account_transaction
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: account_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_type
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  type: numeric(9,2)
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: account_transaction
+            baseColumnNames: account_id
+            referencedTableName: account
+            referencedColumnNames: id
+            constraintName: fk_account_transaction_account
